@@ -1,0 +1,19 @@
+services:
+  mmdetection:
+    build: .
+    shm_size: "8gb"
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    image: openmmlab/mmdetection:1.0
+    container_name: mmdetection
+    ports:
+      - 8888:8888
+    volumes:
+      - ./:/mmdetection
